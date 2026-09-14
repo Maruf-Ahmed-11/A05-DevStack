@@ -1,17 +1,6 @@
 import Banner from '../assets/banner-stack.png'
 
 
-// const Hero = () => {
-//     return (
-//         <div>
-//             <h1>Build Your Ideal
-//                 Development Stack</h1>
-
-//                 <img src={Banner} alt="" />
-//         </div>
-//     );
-// };
-
 const Hero = () => {
   return (
     <div className="hero min-h-[calc(100vh-4rem)] bg-base-100 px-4 lg:px-16">
