@@ -1,4 +1,5 @@
 import { use, useState } from 'react';
+import { toast } from 'react-toastify';
 import type { ITech } from '../../Types/techType';
 import TechCard from './TechCard';
 import StackSidebar from './StackSidebar';
@@ -9,24 +10,32 @@ interface TechProps {
 
 const Tech = ({ techPromise }: TechProps) => {
   const technologies = use(techPromise);
-//   catching in empty array
+  // catching in empty array
   const [selectedStack, setSelectedStack] = useState<ITech[]>([]); 
 
-  // Adding technology to stack
+  // Adding technology to stack (with success or duplicate warning)
   const handleAddToStack = (tech: ITech) => {
-    if (!selectedStack.some((item) => item.id === tech.id)) {
+    const isAlreadyAdded = selectedStack.some((item) => item.id === tech.id);
+
+    if (isAlreadyAdded) {
+      toast.warn(`${tech.name} is already in your stack!`);
+    } else {
       setSelectedStack([...selectedStack, tech]);
+      toast.success(`${tech.name} added to your stack!`);
     }
   };
 
-  // Removeing single technology by id
-  const handleRemoveTech = (id: string) => {
+  // Removing single technology by id and name
+  const handleRemoveTech = (id: string, name: string) => {
     setSelectedStack(selectedStack.filter((item) => item.id !== id));
+    toast.info(`${name} removed from stack.`);
   };
 
-  // Removeing all technologies
+  // Removing all technologies
   const handleRemoveAll = () => {
+    if (selectedStack.length === 0) return;
     setSelectedStack([]);
+    toast.error("Cleared all technologies from stack.");
   };
 
   return (

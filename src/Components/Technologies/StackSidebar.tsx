@@ -2,7 +2,7 @@ import type { ITech } from '../../Types/techType';
 
 interface StackSidebarProps {
   selectedStack: ITech[];
-  onRemoveTech: (id: string) => void;
+  onRemoveTech: (id: string, name: string) => void;
   onRemoveAll: () => void;
 }
 
@@ -32,7 +32,7 @@ const StackSidebar = ({ selectedStack, onRemoveTech, onRemoveAll }: StackSidebar
                 </div>
               </div>
               <button 
-                onClick={() => onRemoveTech(tech.id)}
+                onClick={() => onRemoveTech(tech.id, tech.name)}
                 className="text-base-content/40 hover:text-error text-sm font-bold p-1 transition-colors"
                 aria-label="Remove item"
               >
